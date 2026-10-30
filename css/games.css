@@ -1,0 +1,215 @@
+/* ─── Games section ──────────────────────────────────────────────── */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--s4);
+}
+
+/* ── Shared game card ── */
+.game-card {
+  background: rgba(14,11,22,.88);
+  border: 3px solid;
+  border-color: #6a6a74 #1a1a1e #1a1a1e #6a6a74;
+  box-shadow: 0 0 0 3px #000;
+  padding: var(--s4);
+}
+body[data-theme="terminal"] .game-card {
+  background: rgba(2,11,5,.9);
+  border: 1px solid #39ff1455;
+  box-shadow: 0 0 20px #39ff1420, inset 0 0 40px rgba(0,20,5,.4);
+  border-radius: 0;
+}
+
+.game-title {
+  font-family: var(--px);
+  font-size: .8rem;
+  color: #ffe14d;
+  margin-bottom: var(--s3);
+  text-shadow: 2px 2px #000;
+}
+body[data-theme="terminal"] .game-title {
+  font-family: var(--f-mono);
+  font-size: 1rem;
+  color: #39ff14;
+  text-shadow: 0 0 10px #39ff1480;
+  letter-spacing: .04em;
+}
+body[data-theme="terminal"] .game-title::before { content: "$ "; opacity: .6; }
+
+.game-hud {
+  font-family: var(--px);
+  font-size: 9px;
+  color: var(--c-mute);
+  line-height: 1.9;
+  margin-bottom: var(--s3);
+}
+.game-hud b { color: #7ef542; }
+body[data-theme="terminal"] .game-hud { font-family: var(--f-mono); font-size: 12px; color: #7fd69a; }
+body[data-theme="terminal"] .game-hud b { color: #39ff14; }
+
+.game-btn {
+  display: inline-block;
+  background: #7a7a7a;
+  border: 3px solid;
+  border-color: #d4d4d4 #383838 #383838 #d4d4d4;
+  color: #fff;
+  font: 9px var(--px);
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background .1s;
+  text-shadow: 1px 1px #000;
+}
+.game-btn:hover { background: #5a68c8; }
+.game-btn:active { border-color: #383838 #d4d4d4 #d4d4d4 #383838; }
+.game-btn:disabled { opacity: .55; cursor: default; background: #555; }
+
+body[data-theme="terminal"] .game-btn {
+  background: transparent;
+  border: 1px solid #39ff14;
+  color: #39ff14;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  padding: 9px 20px;
+  border-radius: 0;
+  text-shadow: none;
+  box-shadow: 0 0 10px #39ff1430;
+}
+body[data-theme="terminal"] .game-btn:hover { background: #39ff14; color: #000; box-shadow: 0 0 20px #39ff14; }
+
+/* ── Creeper Whack ── */
+.wh-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+  max-width: 300px;
+  margin-bottom: var(--s3);
+}
+.wh-hole {
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #000;
+  cursor: pointer;
+  padding: 0;
+  background-color: #3d2b1a;
+  box-shadow: inset 0 -14px 0 #0007;
+  image-rendering: pixelated;
+  transition: filter .1s;
+}
+.wh-hole.hit { filter: brightness(3); }
+.wh-hole img {
+  position: absolute; left: 15%; width: 70%; bottom: 0;
+  transform: translateY(105%);
+  transition: transform .12s;
+  image-rendering: pixelated; pointer-events: none;
+}
+.wh-hole.up img { transform: translateY(8%); }
+
+/* ── Dig Deep ── */
+#dig-block {
+  position: relative;
+  width: 120px; height: 120px;
+  border: 4px solid #000;
+  cursor: pointer;
+  image-rendering: pixelated;
+  background-size: cover;
+  margin-bottom: var(--s3);
+  display: block;
+  transition: transform .08s;
+}
+#dig-block:active { transform: scale(.93); }
+#dig-crack {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+.dig-inv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--s2);
+}
+.dig-slot {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 3px; font: 9px var(--px); color: #fff; text-shadow: 1px 1px #000;
+}
+
+/* ── Hacker Typer ── */
+.hacker-terminal {
+  background: #020b05;
+  border: 1px solid #39ff1444;
+  border-radius: 0;
+  padding: 14px;
+  margin-bottom: var(--s3);
+  position: relative;
+}
+.hacker-terminal::before {
+  content: "SYSTEM TERMINAL v2.1 // CLASSIFIED";
+  display: block;
+  font: 10px var(--f-mono);
+  color: #39ff1488;
+  border-bottom: 1px solid #39ff1433;
+  padding-bottom: 8px; margin-bottom: 10px;
+  letter-spacing: .08em;
+}
+#hacker-output {
+  font: 12px/1.7 var(--f-mono);
+  color: #39ff14;
+  text-shadow: 0 0 6px #39ff1455;
+  height: 180px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  scrollbar-width: thin;
+  scrollbar-color: #39ff1433 transparent;
+}
+#hacker-status {
+  font: 11px var(--f-mono);
+  color: #39ff1499;
+  margin-top: 8px;
+  min-height: 1.4em;
+  letter-spacing: .04em;
+}
+.hack-progress-track {
+  height: 4px;
+  background: #0a1a0a;
+  border: 1px solid #39ff1433;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+#hacker-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #39ff14, #ffe14d);
+  box-shadow: 0 0 8px #39ff14;
+  transition: width .1s;
+}
+
+/* ── Matrix Zap ── */
+.zap-wrap {
+  position: relative;
+  margin-bottom: var(--s3);
+  cursor: crosshair;
+  border: 1px solid #39ff1444;
+}
+#zap-canvas {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background: #020b05;
+}
+.zap-click-hint {
+  position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font: 11px var(--f-mono);
+  color: #39ff1466;
+  pointer-events: none;
+  text-align: center;
+  letter-spacing: .06em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  .games-grid { grid-template-columns: 1fr; }
+}

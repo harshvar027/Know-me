@@ -1,0 +1,151 @@
+/* ─── Navbar v2 ──────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 clamp(16px,4vw,40px);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition:
+    background var(--t-mid) var(--ease-out),
+    box-shadow   var(--t-mid) var(--ease-out),
+    border-color var(--t-mid) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+  background: rgba(5,3,15,.72);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 1px 0 var(--glass-border), 0 4px 24px rgba(0,0,0,.3);
+  border-bottom-color: var(--glass-border);
+}
+
+/* ── Logo ── */
+.nav__logo {
+  font-family: var(--f-mono);
+  font-size: 15px;
+  color: var(--c-acc);
+  letter-spacing: .06em;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: color var(--t-fast);
+}
+.nav__logo span { color: var(--c-acc2); }
+.nav__logo:hover { color: var(--c-acc-hi); }
+
+/* ── Link list ── */
+.nav__links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* ── Individual link ── */
+.nav__link {
+  position: relative;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--c-mute);
+  padding: 6px 10px;
+  border-radius: var(--r-sm);
+  transition:
+    color      var(--t-fast),
+    background var(--t-fast);
+}
+.nav__link::after {
+  content: "";
+  position: absolute;
+  bottom: 2px; left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 16px; height: 2px;
+  background: var(--c-acc);
+  border-radius: var(--r-pill);
+  transition: transform var(--t-mid) var(--ease-spring);
+}
+.nav__link:hover {
+  color: var(--c-txt2);
+  background: var(--c-panel-hi);
+}
+.nav__link.active {
+  color: var(--c-txt);
+}
+.nav__link.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ── CTA button ── */
+.nav__cta {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(135deg, var(--c-acc), var(--c-acc2));
+  color: var(--c-bg);
+  transition:
+    transform    var(--t-fast) var(--ease-spring),
+    box-shadow   var(--t-fast),
+    filter       var(--t-fast);
+  letter-spacing: .01em;
+}
+.nav__cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 24px rgba(180,169,255,.4);
+}
+.nav__cta:active { transform: translateY(0); }
+
+/* ── Mobile hamburger ── */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: var(--c-panel);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  padding: 8px;
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+.nav__hamburger:hover { background: var(--c-panel-hi); border-color: var(--c-border-hi); }
+.nav__hamburger span {
+  display: block;
+  width: 100%; height: 1.5px;
+  background: var(--c-txt);
+  border-radius: var(--r-pill);
+  transition: transform var(--t-mid) var(--ease-spring), opacity var(--t-mid);
+}
+.nav__hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav__hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav__hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile menu ── */
+@media (max-width: 840px) {
+  .nav__links {
+    position: fixed;
+    inset: 68px 0 0 0;
+    background: rgba(5,3,15,.96);
+    backdrop-filter: var(--glass-blur-lg);
+    -webkit-backdrop-filter: var(--glass-blur-lg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--s4);
+    font-size: 18px;
+    transform: translateX(100%);
+    transition: transform var(--t-mid) var(--ease-spring);
+    border-left: 1px solid var(--glass-border);
+  }
+  .nav__links.open  { transform: none; }
+  .nav__hamburger   { display: flex; }
+  .nav__link::after { display: none; }
+  .nav__link {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — Harshvardhan Singh Shekhawat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=DM+Mono:wght@0,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <style>
+    .err {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: var(--s4);
+    }
+    .err__code {
+      font-size: clamp(5rem, 20vw, 12rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--c-acc), var(--c-acc2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: var(--s3);
+    }
+    .err__msg {
+      font-family: var(--f-mono);
+      color: var(--c-mute);
+      font-size: 15px;
+      margin-bottom: var(--s5);
+    }
+  </style>
+</head>
+<body>
+<div class="err">
+  <div>
+    <p class="err__code">404</p>
+    <p class="err__msg">// This page does not exist</p>
+    <a href="../index.html" class="btn btn--primary">← Back home</a>
+  </div>
+</div>
+<script>
+  // inline btn style since components.css not loaded here
+  document.querySelector('.btn').style.cssText = `
+    display:inline-flex; align-items:center; gap:8px;
+    font-weight:600; font-size:15px; padding:12px 28px;
+    border-radius:999px; cursor:pointer; border:none;
+    background:var(--c-acc); color:var(--c-bg);
+    text-decoration:none; transition:transform .15s;
+  `;
+</script>
+</body>
+</html>

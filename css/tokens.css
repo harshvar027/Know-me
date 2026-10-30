@@ -1,0 +1,73 @@
+/* ─── Design Tokens v2 ──────────────────────────────────────────────── */
+:root {
+  /* ── Palette ── */
+  --c-bg:         #05030f;
+  --c-bg2:        #08051a;
+  --c-surface:    #0e0b22;
+  --c-surface2:   #130f2e;
+  --c-panel:      rgba(255,255,255,.04);
+  --c-panel-hi:   rgba(255,255,255,.07);
+  --c-border:     rgba(255,255,255,.07);
+  --c-border-hi:  rgba(255,255,255,.14);
+  --c-txt:        #ece9ff;
+  --c-txt2:       #d4d0f5;
+  --c-mute:       #9491b8;
+  --c-mute2:      #6d6a8a;
+  --c-acc:        #b4a9ff;
+  --c-acc-hi:     #cdc5ff;
+  --c-acc-lo:     rgba(180,169,255,.15);
+  --c-acc2:       #ff6fd8;
+  --c-acc2-hi:    #ff9ae8;
+  --c-acc2-lo:    rgba(255,111,216,.15);
+  --c-green:      #7ef542;
+  --c-teal:       #33ebcb;
+  --c-gold:       #ffe14d;
+
+  /* ── Typography ── */
+  --f-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --f-mono:    "DM Mono", ui-monospace, Consolas, monospace;
+  --f-pixel:   "Press Start 2P", ui-monospace, monospace;
+
+  /* ── Spacing scale ── */
+  --s1: 4px;  --s2: 8px;   --s3: 16px;  --s4: 24px;
+  --s5: 40px; --s6: 64px;  --s7: 96px;  --s8: 128px;
+
+  /* ── Border radius ── */
+  --r-xs:   4px;
+  --r-sm:   8px;
+  --r-md:  16px;
+  --r-lg:  24px;
+  --r-xl:  32px;
+  --r-pill: 999px;
+
+  /* ── Shadows ── */
+  --shadow-xs:       0 1px 3px rgba(0,0,0,.4);
+  --shadow-sm:       0 4px 12px rgba(0,0,0,.4);
+  --shadow-md:       0 8px 32px rgba(0,0,0,.5), 0 0 0 1px var(--c-border);
+  --shadow-lg:       0 20px 60px rgba(0,0,0,.6), 0 0 0 1px var(--c-border);
+  --shadow-glow-acc: 0 0 40px rgba(180,169,255,.22), 0 0 80px rgba(180,169,255,.08);
+  --shadow-glow-acc2:0 0 40px rgba(255,111,216,.22), 0 0 80px rgba(255,111,216,.08);
+  --shadow-glow-teal:0 0 40px rgba(51,235,203,.18);
+
+  /* Glass morphism */
+  --glass-bg:      rgba(14,11,34,.7);
+  --glass-border:  rgba(255,255,255,.1);
+  --glass-blur:    blur(20px) saturate(1.6);
+  --glass-blur-lg: blur(40px) saturate(1.8);
+
+  /* ── Easing ── */
+  --ease-spring: cubic-bezier(.2,1.4,.4,1);
+  --ease-out:    cubic-bezier(0,0,.2,1);
+  --ease-in-out: cubic-bezier(.4,0,.2,1);
+  --ease-bounce: cubic-bezier(.34,1.56,.64,1);
+
+  /* ── Duration ── */
+  --t-instant: 80ms;
+  --t-fast:    150ms;
+  --t-mid:     300ms;
+  --t-slow:    500ms;
+  --t-slower:  700ms;
+
+  /* keep old aliases */
+  --ease: var(--ease-spring);
+}

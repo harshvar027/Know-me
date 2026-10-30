@@ -1,0 +1,717 @@
+/* ─── THEME SYSTEM ───────────────────────────────────────────────────
+   Default = Minecraft (no class on body).
+   Alts:   body[data-theme="space"]
+           body[data-theme="terminal"]
+           body[data-theme="synth"]
+           body[data-theme="apple"]
+─────────────────────────────────────────────────────────────────── */
+
+/* ── Minecraft (default) ─────────────────────────────────────────── */
+:root {
+  --px: "Press Start 2P", ui-monospace, Consolas, monospace;
+  image-rendering: pixelated;
+}
+
+body {
+  background: #2a1d12;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(10,8,6,.72);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* MC hero sky */
+.mc-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.mc-sun, .mc-moon {
+  position: absolute;
+  right: 12%;
+  top: 90px;
+  width: 76px;
+  height: 76px;
+  transition: transform 1.2s, opacity 1.2s;
+  image-rendering: pixelated;
+}
+.mc-sun {
+  background: #ffe14d;
+  box-shadow: 0 0 0 10px #ffd23a55, 0 0 80px 30px #ffd23a88;
+  animation: mc-spin 50s linear infinite;
+}
+.mc-moon {
+  background: #e6e9f2;
+  box-shadow: inset -18px 0 0 #b9bfd2, 0 0 60px 14px #aab4ff55;
+  opacity: 0;
+  transform: translateY(160px);
+}
+body.night .mc-sun  { opacity: 0; transform: translateY(160px); }
+body.night .mc-moon { opacity: 1; transform: none; }
+
+.mc-star {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 1.2s;
+}
+body.night .mc-star {
+  opacity: 1;
+  animation: mc-tw 2.4s steps(2) infinite;
+}
+
+.mc-cloud {
+  position: absolute;
+  left: -200px;
+  width: 64px; height: 24px;
+  background: #fff;
+  box-shadow: 16px -16px #fff, 40px -8px #fff, 56px 0 #fff;
+  opacity: .92;
+  animation: mc-drift 70s linear infinite;
+}
+body.night .mc-cloud {
+  background: #8d95b8;
+  box-shadow: 16px -16px #8d95b8, 40px -8px #8d95b8, 56px 0 #8d95b8;
+}
+
+/* MC ground */
+#mc-ground {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 128px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: nowrap;
+  image-rendering: pixelated;
+}
+#mc-ground button {
+  flex: 0 0 64px;
+  height: 64px;
+  border: 0;
+  padding: 0;
+  cursor: crosshair;
+  transition: transform .15s, opacity .15s;
+  image-rendering: pixelated;
+}
+#mc-ground button.gone {
+  transform: scale(.2);
+  opacity: 0;
+}
+
+/* MC creeper */
+#mc-creeper {
+  position: absolute;
+  right: 6%;
+  top: 200px;
+  width: clamp(90px, 16vw, 170px);
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+  animation: mc-bob 3s ease-in-out infinite;
+  image-rendering: pixelated;
+}
+#mc-creeper img { width: 100%; display: block; image-rendering: pixelated; }
+#mc-creeper.fuse { animation: mc-flash .25s steps(2) 5; }
+
+/* MC hero gradient override */
+body:not([data-theme]) .hero,
+body[data-theme="minecraft"] .hero {
+  background: linear-gradient(#5aa9ff, #bfe6ff 70%);
+}
+body.night .hero { background: linear-gradient(#050818, #1b2457 80%) !important; }
+
+/* MC h1 pixel style */
+body:not([data-theme]) .hero__name,
+body[data-theme="minecraft"] .hero__name {
+  font-family: var(--px);
+  font-size: clamp(1.4rem, 5vw, 2.8rem);
+  background: none;
+  -webkit-text-fill-color: #fff;
+  text-shadow: 0 4px #3b3b3b, 0 8px #1c1c1c, 4px 4px #3b3b3b;
+  letter-spacing: .02em;
+}
+body:not([data-theme]) .hero__eyebrow,
+body[data-theme="minecraft"] .hero__eyebrow {
+  font-family: var(--px);
+  font-size: 10px;
+  color: #ffe14d;
+}
+body:not([data-theme]) .hero__tagline,
+body[data-theme="minecraft"] .hero__tagline {
+  font-family: var(--px);
+  font-size: 11px;
+  color: #7ef542;
+}
+body:not([data-theme]) .hero__desc,
+body[data-theme="minecraft"] .hero__desc {
+  font-size: 14px;
+}
+body:not([data-theme]) .btn--primary,
+body[data-theme="minecraft"] .btn--primary {
+  background: #7a7a7a;
+  border: 3px solid;
+  border-color: #d4d4d4 #383838 #383838 #d4d4d4;
+  color: #fff;
+  text-shadow: 2px 2px #3a3a3a;
+  font-family: var(--px);
+  font-size: 10px;
+  border-radius: 0;
+}
+body:not([data-theme]) .btn--primary:hover,
+body[data-theme="minecraft"] .btn--primary:hover {
+  background: #5a68c8;
+  transform: none;
+  box-shadow: none;
+}
+body:not([data-theme]) .btn--ghost,
+body[data-theme="minecraft"] .btn--ghost {
+  background: #7a7a7a;
+  border: 3px solid;
+  border-color: #d4d4d4 #383838 #383838 #d4d4d4;
+  color: #fff;
+  text-shadow: 2px 2px #3a3a3a;
+  font-family: var(--px);
+  font-size: 10px;
+  border-radius: 0;
+  backdrop-filter: none;
+}
+
+/* MC section headings */
+body:not([data-theme]) h2,
+body[data-theme="minecraft"] h2 {
+  font-family: var(--px);
+  font-size: clamp(.9rem, 2.5vw, 1.4rem);
+  text-shadow: 3px 3px #000;
+  color: #fff;
+}
+
+/* MC cards */
+body:not([data-theme]) .card,
+body[data-theme="minecraft"] .card {
+  background: rgba(24,24,30,.92);
+  border: 4px solid;
+  border-color: #6a6a74 #1a1a1e #1a1a1e #6a6a74;
+  box-shadow: 0 0 0 4px #000;
+  border-radius: 0;
+}
+body:not([data-theme]) .proj-card,
+body[data-theme="minecraft"] .proj-card {
+  background: rgba(24,24,30,.92);
+  border: 4px solid;
+  border-color: #6a6a74 #1a1a1e #1a1a1e #6a6a74;
+  box-shadow: 0 0 0 4px #000;
+  border-radius: 0;
+}
+body:not([data-theme]) .proj-card:hover,
+body[data-theme="minecraft"] .proj-card:hover {
+  border-color: #ffe14d #7a6a1a #7a6a1a #ffe14d;
+  transform: none;
+  box-shadow: 0 0 0 4px #000;
+}
+body:not([data-theme]) .proj-card__title,
+body[data-theme="minecraft"] .proj-card__title {
+  font-family: var(--px);
+  font-size: .75rem;
+  color: #ffe14d;
+}
+body:not([data-theme]) .skill-pill,
+body[data-theme="minecraft"] .skill-pill {
+  border-radius: 0;
+  border: 2px solid #555;
+  background: rgba(24,24,30,.92);
+}
+body:not([data-theme]) .skill-pill:hover,
+body[data-theme="minecraft"] .skill-pill:hover {
+  border-color: #7ef542;
+}
+body:not([data-theme]) .tag,
+body[data-theme="minecraft"] .tag {
+  font-family: var(--px);
+  border-radius: 0;
+  background: #222;
+  color: #7ef542;
+  border-color: #444;
+}
+body:not([data-theme]) .section__label,
+body[data-theme="minecraft"] .section__label {
+  font-family: var(--px);
+  font-size: 9px;
+  color: #ffe14d;
+}
+body:not([data-theme]) .nav__logo,
+body[data-theme="minecraft"] .nav__logo {
+  font-family: var(--px);
+  font-size: 12px;
+}
+body:not([data-theme]) .nav__link,
+body[data-theme="minecraft"] .nav__link {
+  font-family: var(--px);
+  font-size: 9px;
+}
+body:not([data-theme]) .nav__cta,
+body[data-theme="minecraft"] .nav__cta {
+  font-family: var(--px);
+  font-size: 9px;
+  border-radius: 0;
+  background: #7a7a7a;
+  border: 3px solid;
+  border-color: #d4d4d4 #383838 #383838 #d4d4d4;
+  color: #fff;
+}
+
+/* MC xp bar */
+body:not([data-theme]) #xp-bar,
+body[data-theme="minecraft"] #xp-bar {
+  display: block;
+}
+body[data-theme="space"] #xp-bar,
+body[data-theme="terminal"] #xp-bar,
+body[data-theme="synth"] #xp-bar,
+body[data-theme="apple"] #xp-bar {
+  display: none;
+}
+
+/* ── KEYFRAMES (shared) ──────────────────────────────────────────── */
+@keyframes mc-spin  { to { transform: rotate(360deg); } }
+@keyframes mc-bob   { 50% { transform: translateY(-16px) rotate(3deg); } }
+@keyframes mc-flash { 50% { filter: brightness(4); } }
+@keyframes mc-drift { to { transform: translateX(calc(100vw + 400px)); } }
+@keyframes mc-tw    { 50% { opacity: .25; } }
+
+/* ── SPACE THEME ─────────────────────────────────────────────────── */
+body[data-theme="space"] {
+  --c-bg:      #05030f;
+  --c-surface: #0e0b22;
+  --c-panel:   rgba(255,255,255,.04);
+  --c-border:  rgba(255,255,255,.08);
+  --c-txt:     #ece9ff;
+  --c-mute:    #b6b0e6;
+  --c-acc:     #b4a9ff;
+  --c-acc2:    #ff6fd8;
+  --c-green:   #7ef542;
+  --c-gold:    #ffe14d;
+  background: #05030f;
+  image-rendering: auto;
+}
+body[data-theme="space"] .hero {
+  background: radial-gradient(ellipse at 70% 20%, #2a1b6b, #05030f 70%);
+}
+body[data-theme="space"] .hero::after {
+  content: "";
+  position: absolute;
+  right: 9%; top: 110px;
+  width: clamp(90px,15vw,170px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffd29a, #d9531e 55%, #3b0d02);
+  box-shadow: 0 0 70px #ff7a1a44;
+  animation: mc-bob 6s ease-in-out infinite;
+  z-index: 0;
+}
+body[data-theme="space"] .mc-sky,
+body[data-theme="space"] #mc-ground,
+body[data-theme="space"] #mc-creeper { display: none; }
+body[data-theme="space"] .hero__blob { display: block; }
+body[data-theme="space"] .hero__aurora { display: block; }
+body[data-theme="space"] .mc-star {
+  display: block; opacity: 1; width: 3px; height: 3px;
+  animation: mc-tw 2.4s steps(2) infinite;
+}
+body[data-theme="space"] .hero__name {
+  font-size: clamp(2.8rem,8vw,6rem);
+  background: linear-gradient(135deg,#fff 30%,var(--c-acc) 65%,var(--c-acc2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  font-family: var(--f-display); text-shadow: none;
+}
+
+/* ── TERMINAL THEME ──────────────────────────────────────────────── */
+body[data-theme="terminal"] {
+  --c-bg:    #020b05;
+  --c-acc:   #39ff14;
+  --c-acc2:  #39ff14;
+  --c-txt:   #c8ffd4;
+  --c-mute:  #7fd69a;
+  --c-panel: rgba(0,20,5,.85);
+  --c-border: #39ff1433;
+  background: #020b05;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  image-rendering: auto;
+}
+body[data-theme="terminal"]::before {
+  background: repeating-linear-gradient(#0000 0 2px, #0003 3px 4px);
+  z-index: 80;
+  position: fixed; inset: 0; content: ""; pointer-events: none;
+}
+body[data-theme="terminal"] .hero {
+  background: #020b05;
+}
+body[data-theme="terminal"] .mc-sky,
+body[data-theme="terminal"] #mc-ground,
+body[data-theme="terminal"] #mc-creeper { display: none; }
+body[data-theme="terminal"] .hero__name {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: clamp(2rem,6vw,4rem);
+  background: none;
+  -webkit-text-fill-color: #39ff14;
+  text-shadow: 0 0 20px #39ff1488;
+}
+body[data-theme="terminal"] .hero__tagline { color: #39ff14; font-family: ui-monospace; }
+body[data-theme="terminal"] h2::before { content: "$ "; opacity: .7; }
+body[data-theme="terminal"] .btn--primary {
+  background: transparent;
+  border: 1px solid #39ff14;
+  color: #39ff14;
+  border-radius: 0;
+  font-family: ui-monospace;
+  box-shadow: none;
+}
+body[data-theme="terminal"] .btn--primary:hover { background: #39ff14; color: #000; }
+body[data-theme="terminal"] .card,
+body[data-theme="terminal"] .proj-card { border-radius: 0; border-color: #1f7a2e; }
+body[data-theme="terminal"] .tag { background: #052a10; color: #39ff14; border-radius: 0; border-color: #1f7a2e; }
+/* rain canvas */
+body[data-theme="terminal"] #mc-rain { display: block !important; }
+
+/* ── SYNTH THEME ─────────────────────────────────────────────────── */
+body[data-theme="synth"] {
+  --c-bg:    #12002b;
+  --c-acc:   #00f0ff;
+  --c-acc2:  #ff2ec4;
+  --c-txt:   #fde7ff;
+  --c-mute:  #cfa6e8;
+  --c-panel: rgba(24,0,56,.85);
+  --c-border: #ff2ec444;
+  background: linear-gradient(#12002b, #220550);
+  image-rendering: auto;
+}
+body[data-theme="synth"] .hero {
+  background: linear-gradient(#12002b, #3b0a73 55%, #ff2ec4);
+}
+body[data-theme="synth"] .mc-sky,
+body[data-theme="synth"] #mc-ground,
+body[data-theme="synth"] #mc-creeper { display: none; }
+body[data-theme="synth"] .hero__name {
+  font-size: clamp(2.8rem,8vw,6rem);
+  background: linear-gradient(135deg, #fff, #ff2ec4 60%, #00f0ff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  text-shadow: none;
+}
+body[data-theme="synth"] .hero::after {
+  content: "";
+  position: absolute;
+  left: -50%; right: -50%;
+  bottom: 0; height: 180px;
+  z-index: 0;
+  background:
+    linear-gradient(#ff2ec4 2px, transparent 2px) 0 0/100% 30px,
+    linear-gradient(90deg, #ff2ec4 2px, transparent 2px) 0 0/60px 100%,
+    #12002b;
+  transform: perspective(220px) rotateX(58deg);
+  transform-origin: bottom;
+  animation: synth-grid 1.2s linear infinite;
+}
+@keyframes synth-grid { to { background-position: 0 30px, 0 0, 0 0; } }
+body[data-theme="synth"] .btn--primary {
+  background: linear-gradient(90deg, #ff2ec4, #7a2cff);
+  border: 2px solid #00f0ff;
+  border-radius: 4px;
+  box-shadow: 0 0 22px #ff2ec488;
+}
+body[data-theme="synth"] .btn--primary:hover { box-shadow: 0 0 40px #ff2ec4; transform: translateY(-3px); }
+body[data-theme="synth"] .tag { background: #2a0a5a; color: #00f0ff; border-color: #7a2cff; border-radius: 4px; }
+
+/* ── APPLE THEME ─────────────────────────────────────────────────── */
+body[data-theme="apple"] {
+  --c-bg:    #f5f5f7;
+  --c-surface: #fff;
+  --c-panel: rgba(255,255,255,.72);
+  --c-border: rgba(0,0,0,.08);
+  --c-txt:   #1d1d1f;
+  --c-mute:  #5c5c63;
+  --c-acc:   #0066cc;
+  --c-acc2:  #bf5af2;
+  background: #f5f5f7;
+  image-rendering: auto;
+}
+body[data-theme="apple"] body::before { display: none; }
+body[data-theme="apple"] .hero {
+  background:
+    radial-gradient(circle at 20% 30%, #a8c8ff, transparent 45%),
+    radial-gradient(circle at 80% 25%, #ffc4e1, transparent 45%),
+    radial-gradient(circle at 65% 85%, #c6f6d8, transparent 45%),
+    #f5f5f7;
+  background-size: 160% 160%;
+  animation: blob 16s ease-in-out infinite alternate;
+}
+@keyframes blob { to { background-position: 100% 100%; } }
+body[data-theme="apple"] .mc-sky,
+body[data-theme="apple"] #mc-ground,
+body[data-theme="apple"] #mc-creeper { display: none; }
+body[data-theme="apple"] .hero__name {
+  font-size: clamp(2.8rem,8vw,6rem);
+  background: linear-gradient(135deg, #1d1d1f, var(--c-acc) 60%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  text-shadow: none;
+}
+body[data-theme="apple"] .hero__eyebrow { color: #bf5af2; }
+body[data-theme="apple"] .hero__tagline { color: #3a3a3c; }
+body[data-theme="apple"] .hero__desc { color: #3a3a3c; }
+body[data-theme="apple"] .hero__scroll { color: #6e6e73; }
+body[data-theme="apple"] .btn--primary {
+  background: #0071e3;
+  color: #fff;
+  border-radius: 999px;
+  border: none;
+  box-shadow: none;
+}
+body[data-theme="apple"] .btn--primary:hover { background: #0077ed; box-shadow: 0 6px 20px rgba(0,113,227,.35); }
+body[data-theme="apple"] .btn--ghost {
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.12);
+  color: #1d1d1f;
+}
+body[data-theme="apple"] .card,
+body[data-theme="apple"] .proj-card {
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 22px;
+  backdrop-filter: blur(22px) saturate(1.6);
+  box-shadow: 0 10px 40px rgba(0,0,0,.1);
+}
+body[data-theme="apple"] .proj-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,.18); }
+body[data-theme="apple"] .proj-card__title { color: #0066cc; }
+body[data-theme="apple"] .skill-pill { background: rgba(255,255,255,.72); border-radius: 16px; color: #1d1d1f; border-color: rgba(0,0,0,.08); }
+body[data-theme="apple"] .tag { background: rgba(0,102,204,.1); color: #0066cc; border-color: rgba(0,102,204,.2); border-radius: 999px; }
+body[data-theme="apple"] h2 { color: #1d1d1f; text-shadow: none; }
+body[data-theme="apple"] .section__label { color: #bf5af2; }
+body[data-theme="apple"] .nav__logo span { color: #bf5af2; }
+body[data-theme="apple"] .nav.scrolled { background: rgba(255,255,255,.72); }
+body[data-theme="apple"] .nav__link { color: #3a3a3c; }
+body[data-theme="apple"] .nav__link:hover { color: #1d1d1f; }
+body[data-theme="apple"] .form-input,
+body[data-theme="apple"] .form-textarea {
+  background: #fff;
+  border-color: rgba(0,0,0,.15);
+  color: #1d1d1f;
+}
+body[data-theme="apple"] .form-label { color: #3a3a3c; }
+
+/* ── THEME BUTTON (in nav) ───────────────────────────────────────── */
+#theme-btn {
+  font-size: 11px;
+  padding: 7px 12px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--c-border);
+  color: var(--c-txt);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  font-family: var(--f-mono);
+  transition: background var(--t-fast), color var(--t-fast);
+  white-space: nowrap;
+}
+#theme-btn:hover { background: rgba(255,255,255,.16); }
+
+body:not([data-theme]) #theme-btn,
+body[data-theme="minecraft"] #theme-btn {
+  font-family: var(--px);
+  font-size: 9px;
+  border-radius: 0;
+  border: 3px solid;
+  border-color: #d4d4d4 #383838 #383838 #d4d4d4;
+  background: #7a7a7a;
+  color: #fff;
+}
+
+/* ── XP BAR (Minecraft only) ─────────────────────────────────────── */
+#xp-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 12px;
+  background: #111;
+  border-bottom: 2px solid #000;
+  z-index: 200;
+  display: none; /* shown only in MC */
+}
+#xp-fill {
+  height: 100%; width: 0;
+  background: #7ef542;
+  box-shadow: inset 0 -4px 0 #4aa81f, inset 0 3px 0 #b9ff8f;
+  transition: width .1s linear;
+}
+#xp-level {
+  position: fixed;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  font: 12px var(--px);
+  color: #7ef542;
+  text-shadow: 2px 2px #000;
+  z-index: 201;
+  display: none;
+}
+
+body:not([data-theme]) #xp-bar,
+body[data-theme="minecraft"] #xp-bar,
+body:not([data-theme]) #xp-level,
+body[data-theme="minecraft"] #xp-level { display: block; }
+
+/* padding-top for xp bar offset */
+body:not([data-theme]) .nav,
+body[data-theme="minecraft"] .nav { top: 14px; }
+body:not([data-theme]) #top,
+body[data-theme="minecraft"] #top { padding-top: 14px; }
+
+/* ── Achievement toasts ──────────────────────────────────────────── */
+#toasts {
+  position: fixed;
+  top: 70px; right: 12px;
+  z-index: 600;
+  display: grid;
+  gap: 10px;
+  pointer-events: none;
+}
+.toast {
+  background: #222;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 3px #000;
+  padding: 10px 14px;
+  max-width: 270px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-family: system-ui, sans-serif;
+}
+.toast b {
+  display: block;
+  font: 10px var(--px);
+  color: #ffe14d;
+  margin-bottom: 4px;
+}
+
+/* ── MC rain (terminal) ──────────────────────────────────────────── */
+#mc-rain {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  opacity: .35;
+  pointer-events: none;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mc-sun, .mc-moon, .mc-cloud, #mc-creeper { animation: none !important; }
+}
+
+/* ── Ambient orbs: hidden behind MC sky, shown in alt themes ─────── */
+body:not([data-theme]) .ambient,
+body[data-theme="minecraft"] .ambient { display: none; }
+
+/* ── Minecraft: section divider uses pixel-green ─────────────────── */
+body:not([data-theme]) .section-divider,
+body[data-theme="minecraft"] .section-divider {
+  background: linear-gradient(90deg, #7ef542, #ffe14d);
+}
+
+/* ── Minecraft: section label uses pixel font ────────────────────── */
+body:not([data-theme]) .section__label,
+body[data-theme="minecraft"] .section__label {
+  font-family: var(--px);
+  font-size: 9px;
+  color: #ffe14d;
+}
+body:not([data-theme]) .section__label::before,
+body[data-theme="minecraft"] .section__label::before { background: #ffe14d; }
+
+/* ── Minecraft: quest card accents ───────────────────────────────── */
+body:not([data-theme]) .quest-card__badge,
+body[data-theme="minecraft"] .quest-card__badge { font-family: var(--px); font-size: 9px; }
+
+/* ── Minecraft: override hero stats gradient to MC colors ────────── */
+body:not([data-theme]) .hero__stat-num,
+body[data-theme="minecraft"] .hero__stat-num {
+  background: linear-gradient(135deg, #7ef542, #ffe14d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Apple / Space: smooth scrollbar ─────────────────────────────── */
+body[data-theme="apple"] ::-webkit-scrollbar-thumb { background: rgba(0,102,204,.2); }
+body[data-theme="apple"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,102,204,.4); }
+
+/* ── Terminal: hero panel override ─────────────────────────────── */
+body[data-theme="terminal"] .mc-hero-panel {
+  background: rgba(2,11,5,.92) !important;
+  border: 1px solid #39ff1455 !important;
+  box-shadow: 0 0 30px #39ff1420 !important;
+}
+body[data-theme="terminal"] .hero__name {
+  font-family: ui-monospace, Menlo, Consolas, monospace !important;
+  font-size: clamp(2rem,6vw,4rem) !important;
+  -webkit-text-fill-color: #39ff14 !important;
+  color: #39ff14 !important;
+  background: none !important;
+  text-shadow: 0 0 20px #39ff1488, 2px 2px #000 !important;
+}
+body[data-theme="terminal"] .hero__name span {
+  -webkit-text-fill-color: #ffe14d !important;
+  color: #ffe14d !important;
+  text-shadow: 0 0 14px #ffe14d88 !important;
+}
+
+/* ── Terminal: don't double-prefix game-title (it already has $ via CSS) ── */
+body[data-theme="terminal"] .section__label::before { display: none; }
+body[data-theme="terminal"] .section__label { padding-left: 0; }
+
+/* ── Terminal: nav link active indicator ───────────────────────── */
+body[data-theme="terminal"] .nav__link.active { color: #39ff14; }
+body[data-theme="terminal"] .nav__link::after  { background: #39ff14; }
+body[data-theme="terminal"] .nav__cta {
+  background: transparent;
+  border: 1px solid #39ff14;
+  color: #39ff14;
+  border-radius: 0;
+}
+body[data-theme="terminal"] .nav__cta:hover {
+  background: #39ff14;
+  color: #000;
+  box-shadow: 0 0 16px #39ff14;
+}
+
+/* ── Terminal: section title $ prefix ─────────────────────────── */
+body[data-theme="terminal"] .section__title::before { content: "// "; opacity: .5; font-family: var(--f-mono); font-size: .7em; }
+
+/* ── Terminal: section divider green ──────────────────────────── */
+body[data-theme="terminal"] .section-divider { background: linear-gradient(90deg,#39ff14,#ffe14d); }
+
+/* ── Terminal: skill pills ────────────────────────────────────── */
+body[data-theme="terminal"] .skill-pill { border-color: #1f7a2e; border-radius: 0; }
+body[data-theme="terminal"] .skill-pill:hover { border-color: #39ff14; color: #39ff14; background: rgba(57,255,20,.08); }
+body[data-theme="terminal"] .tag { background: #052a10; color: #39ff14; border-color: #1f7a2e; border-radius: 0; }
+
+/* ── Terminal: contact links ──────────────────────────────────── */
+body[data-theme="terminal"] .contact-link { border-color: #1f7a2e; border-radius: 0; }
+body[data-theme="terminal"] .contact-link:hover { border-color: #39ff14; box-shadow: 0 0 16px #39ff1422; }
+body[data-theme="terminal"] .contact-link__name { color: #39ff14; }
+
+/* ── Terminal: form ────────────────────────────────────────────── */
+body[data-theme="terminal"] .contact__form { border-color: #1f7a2e; border-radius: 0; }
+body[data-theme="terminal"] .form-input,
+body[data-theme="terminal"] .form-textarea { border-color: #1f7a2e; background: rgba(2,20,8,.6); color: #c8ffd4; border-radius: 0; }
+body[data-theme="terminal"] .form-input:focus,
+body[data-theme="terminal"] .form-textarea:focus { border-color: #39ff14; box-shadow: 0 0 0 2px #39ff1422; }
+body[data-theme="terminal"] .form-submit { background: #39ff14; color: #000; border-radius: 0; box-shadow: 0 0 16px #39ff1444; }
+body[data-theme="terminal"] .form-submit:hover { background: #5fff40; }
+
+/* ── Terminal: footer ──────────────────────────────────────────── */
+body[data-theme="terminal"] .footer { border-color: #1f7a2e; }
+body[data-theme="terminal"] .footer__copy a { color: #39ff14; }
