@@ -1,4 +1,4 @@
-# Nst-Poetfolio
+# Nst-Portfolio
 
 **Harshvardhan Singh Shekhawat** — Frontend Developer & Competitive Programmer  
 Personal portfolio, enhanced edition.
